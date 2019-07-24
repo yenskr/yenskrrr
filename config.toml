@@ -1,4 +1,4 @@
-baseurl = "https://example.com/"
+baseurl = "https://yenskr.netlify.com/"
 title = "Site Title"
 theme = "pulp"
 canonifyurls = true
