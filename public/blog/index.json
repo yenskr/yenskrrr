@@ -1,5 +1,13 @@
 [
     {
+        "ref": "/blog/first-post/",
+        "title": "第一篇!",
+        "section": "blog",
+        "date" : "2019.07.24",
+        "body": " the very first post Should it be a special moment? :)\n"
+    }
+,
+    {
         "ref": "/blog/markdown-syntax/",
         "title": "Markdown Syntax Guide",
         "section": "blog",
