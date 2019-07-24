@@ -20,6 +20,15 @@
     </item>
     
     <item>
+      <title>第二篇!</title>
+      <link>/blog/second-post/</link>
+      <pubDate>Wed, 24 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/second-post/</guid>
+      <description>2nd post also worth remember!</description>
+    </item>
+    
+    <item>
       <title>Markdown Syntax Guide</title>
       <link>/blog/markdown-syntax/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>

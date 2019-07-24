@@ -20,6 +20,11 @@
   </url>
   
   <url>
+    <loc>/blog/second-post/</loc>
+    <lastmod>2019-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/markdown-syntax/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url>

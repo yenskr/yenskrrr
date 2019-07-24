@@ -8,6 +8,14 @@
     }
 ,
     {
+        "ref": "/blog/second-post/",
+        "title": "第二篇!",
+        "section": "blog",
+        "date" : "2019.07.24",
+        "body": " 2nd post also worth remember!\n"
+    }
+,
+    {
         "ref": "/blog/markdown-syntax/",
         "title": "Markdown Syntax Guide",
         "section": "blog",
