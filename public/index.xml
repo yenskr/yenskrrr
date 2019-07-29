@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>About Me</title>
+      <link>/about/about-me/</link>
+      <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/about/about-me/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>如何在win10中解壓縮tar檔案</title>
       <link>/blog/extract-tar-file-on-win10/</link>
       <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
