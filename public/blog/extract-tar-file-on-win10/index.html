@@ -26,26 +26,26 @@
   
 
   <meta property="og:title" content="如何在win10中解壓縮tar檔案" />
-<meta property="og:description" content="背景 當我們把程式更新推送到 shinyapps.io，會把舊的檔案蓋掉。如果想要在推送前把舊版檔案備份的話，可以先到 shinyapps.io 把專案的 bundle 整個下載下來。" />
+<meta property="og:description" content="前言 當我們把程式更新推送到 shinyapps.io，會把舊的檔案蓋掉。如果想要在推送前把舊版檔案備份的話，可以先到 shinyapps.io 把專案的 bundle 整個下載下來。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/blog/extract-tar-file-on-win10/" />
 <meta property="article:published_time" content="2019-07-29T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2019-07-29T00:00:00&#43;00:00"/>
 
 <meta itemprop="name" content="如何在win10中解壓縮tar檔案">
-<meta itemprop="description" content="背景 當我們把程式更新推送到 shinyapps.io，會把舊的檔案蓋掉。如果想要在推送前把舊版檔案備份的話，可以先到 shinyapps.io 把專案的 bundle 整個下載下來。">
+<meta itemprop="description" content="前言 當我們把程式更新推送到 shinyapps.io，會把舊的檔案蓋掉。如果想要在推送前把舊版檔案備份的話，可以先到 shinyapps.io 把專案的 bundle 整個下載下來。">
 
 
 <meta itemprop="datePublished" content="2019-07-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-07-29T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="369">
+<meta itemprop="wordCount" content="358">
 
 
 
 <meta itemprop="keywords" content="tar,linux,win10,cmd," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="如何在win10中解壓縮tar檔案"/>
-<meta name="twitter:description" content="背景 當我們把程式更新推送到 shinyapps.io，會把舊的檔案蓋掉。如果想要在推送前把舊版檔案備份的話，可以先到 shinyapps.io 把專案的 bundle 整個下載下來。"/>
+<meta name="twitter:description" content="前言 當我們把程式更新推送到 shinyapps.io，會把舊的檔案蓋掉。如果想要在推送前把舊版檔案備份的話，可以先到 shinyapps.io 把專案的 bundle 整個下載下來。"/>
 
   <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -78,37 +78,45 @@
   <div id="contentBody">
     
 
-<h3 id="背景">背景</h3>
+<h3 id="前言">前言</h3>
 
-<p>當我們把程式更新推送到 <a href="https://www.shinyapps.io/admin/#/dashboard">shinyapps.io</a>，會把舊的檔案蓋掉。如果想要在推送前把舊版檔案備份的話，可以先到 shinyapps.io 把專案的 bundle 整個下載下來。
-<img src="https://i.imgur.com/URIEair.jpg" alt="bundle" /></p>
+<p>當我們把程式更新推送到 <a href="https://www.shinyapps.io/admin/#/dashboard">shinyapps.io</a>，會把舊的檔案蓋掉。如果想要在推送前把舊版檔案備份的話，可以先到 shinyapps.io 把專案的 bundle 整個下載下來。</p>
 
-<p>從 <kbd>shinyapps.io</kbd> 下載下來的 <kbd>bundle</kbd> 檔案是 <kbd>.tar</kbd> 格式，如果直接用 <kbd>rar</kbd> 軟體，解壓縮出來的東西是看不懂的&hellip;
-<img src="https://i.imgur.com/3bKGnFE.jpg" alt="" /></p>
+<p><img src="https://i.imgur.com/URIEair.jpg" alt="bundle" /></p>
+
+<p>從 <kbd>shinyapps.io</kbd> 下載下來的 <kbd>bundle</kbd> 檔案是 <kbd>.tar</kbd> 格式，如果直接用 <kbd>rar</kbd> 軟體，解壓縮出來的東西是看不懂的&hellip;</p>
+
+<p><img src="https://i.imgur.com/3bKGnFE.jpg" alt="" /></p>
+
+<hr />
 
 <h3 id="問題">問題</h3>
 
 <blockquote>
-<p>成功解壓縮 <kbd>.tar</kbd> 檔案</p>
+<p>在win10環境下成功解壓縮 <kbd>.tar</kbd> 檔案</p>
 </blockquote>
 
 <h3 id="解法">解法</h3>
 
 <ol>
-<li>使用 <kbd>cmd</kbd> 或 <kbd>powershell</kbd> 等工具打開命令列(個人使用 <a href="https://conemu.github.io/">ConEmu</a>，推薦！)，直接使用內建的 <kbd>tar</kbd> 指令解壓縮。</li>
-<li>輸入下列指令
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">tar <span style="color:#f92672">-</span>xvzf [檔案路徑<span style="color:#f92672">/</span>file.tar] <span style="color:#f92672">-</span>C [解壓路徑資料夾]</code></pre></div></li>
-<li>參數說明:
+<li>使用 <kbd>cmd</kbd> 或 <kbd>powershell</kbd> 等工具打開命令列(個人使用 <a href="https://conemu.github.io/">ConEmu</a>，推薦！)，用 <kbd>tar</kbd> 指令解壓縮。</li>
+<li>輸入下列指令及參數
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">&gt; tar -xvzf [檔案路徑/file.tar] -C [解壓路徑資料夾]</code></pre></div></li>
+
+<li><p>參數說明:</p>
 
 <ul>
-<li>x — 指定模式，此為必加參數。其他模式尚有<kbd>-c: create</kbd>、<kbd>-r: add/replace</kbd>、<kbd>-t: list</kbd>、<kbd>-u: update</kbd>、<kbd>-x: extract</kbd></li>
-<li>v — verbose. 顯示詳細壓縮/解壓縮過程(如果不加此參數則會在解壓縮完畢後重新看到閃爍游標)</li>
+<li>x — 表示指定模式為「解壓縮」，<strong>必要參數</strong>。(其他模式尚有<code>-c</code>、<code>-r</code>、<code>-t</code>、<code>-u</code>)</li>
+<li>v — verbose. 顯示詳細解壓縮過程，<strong>非必要參數</strong>。</li>
 <li>z — tells tar to uncompressed the content of a .tar.gz file with gzip.</li>
 <li>f — instructs tar the name of the file you’re about to extract.</li>
-<li><kbd>cmd</kbd> 中輸入 <kbd>tar &ndash;help</kbd> 看更多</li>
+<li>C - 更換至[解壓路徑資料夾]。(Change to &lt;dir&gt; before processing remaining files)</li>
+<li><code>cmd</code> 中輸入 <code>tar --help</code> 看更多參數說明
+<br /></li>
 </ul></li>
-<li>解壓縮成功!
-<img src="https://i.imgur.com/JAz2pmV.jpg" alt="" /></li>
+
+<li><p>解壓縮成功!
+<img src="https://i.imgur.com/JAz2pmV.jpg" alt="" /></p></li>
 </ol>
 
 <h3 id="參考">參考</h3>

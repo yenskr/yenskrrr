@@ -4,6 +4,8 @@ theme = "pulp"
 canonifyurls = true
 hasCJKLanguage = true
 # pygmentsCodefences = true
+# disqusShortname = "yenskr"
+# pygmentsStyle = "Zenburn"
 # pygmentsUseClasses = true
 # googleAnalytics = "{your tracking code}"
 
