@@ -1,5 +1,13 @@
 [
     {
+        "ref": "/blog/extract-tar-file-on-win10/",
+        "title": "如何在win10中解壓縮tar檔案",
+        "section": "blog",
+        "date" : "2019.07.29",
+        "body": " 背景 當我們把程式更新推送到 shinyapps.io，會把舊的檔案蓋掉。如果想要在推送前把舊版檔案備份的話，可以先到 shinyapps.io 把專案的 bundle 整個下載下來。 從 shinyapps.io 下載下來的 bundle 檔案是 .tar 格式，如果直接用 rar 軟體，解壓縮出來的東西是看不懂的\u0026hellip; 問題  成功解壓縮 .tar 檔案\n 解法  使用 cmd 或 powershell 等工具打開命令列(個人使用 ConEmu，推薦！)，直接使用內建的 tar 指令解壓縮。 輸入下列指令 tar -xvzf [檔案路徑/file.tar] -C [解壓路徑資料夾] 參數說明:  x — 指定模式，此為必加參數。其他模式尚有-c: create、-r: add/replace、-t: list、-u: update、-x: extract v — verbose. 顯示詳細壓縮/解壓縮過程(如果不加此參數則會在解壓縮完畢後重新看到閃爍游標) z — tells tar to uncompressed the content of a .tar.gz file with gzip. f — instructs tar the name of the file you’re about to extract. cmd 中輸入 tar \u0026ndash;help 看更多  解壓縮成功!   參考  https://support.rstudio.com/hc/en-us/articles/204536588-Downloading-your-application-from-shinyapps-io https://pureinfotech.com/extract-tar-gz-files-windows-10/ https://anal02.pixnet.net/blog/post/113556857-tar%E8%A7%A3%E5%A3%93%E7%B8%AE%E6%8C%87%E4%BB%A4  "
+    }
+,
+    {
         "ref": "/blog/first-post/",
         "title": "第一篇!",
         "section": "blog",

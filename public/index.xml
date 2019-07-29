@@ -5,10 +5,19 @@
     <link>/</link>
     <description>Recent content on Yenskrrr</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 24 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>如何在win10中解壓縮tar檔案</title>
+      <link>/blog/extract-tar-file-on-win10/</link>
+      <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/extract-tar-file-on-win10/</guid>
+      <description>背景 當我們把程式更新推送到 shinyapps.io，會把舊的檔案蓋掉。如果想要在推送前把舊版檔案備份的話，可以先到 shinyapps.io 把專案的 bundle 整個下載下來。</description>
+    </item>
     
     <item>
       <title>第一篇!</title>
