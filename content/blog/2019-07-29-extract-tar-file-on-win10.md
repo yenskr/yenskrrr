@@ -16,9 +16,11 @@ images: []
 
 ### 背景
 當我們把程式更新推送到 [shinyapps.io](https://www.shinyapps.io/admin/#/dashboard)，會把舊的檔案蓋掉。如果想要在推送前把舊版檔案備份的話，可以先到 shinyapps.io 把專案的 bundle 整個下載下來。
+
 ![bundle](https://i.imgur.com/URIEair.jpg)
 
 從 <kbd>shinyapps.io</kbd> 下載下來的 <kbd>bundle</kbd> 檔案是 <kbd>.tar</kbd> 格式，如果直接用 <kbd>rar</kbd> 軟體，解壓縮出來的東西是看不懂的...
+
 ![](https://i.imgur.com/3bKGnFE.jpg)
 
 ### 問題
@@ -31,11 +33,11 @@ images: []
 tar -xvzf [檔案路徑/file.tar] -C [解壓路徑資料夾]
 {{< /highlight >}}
 3. 參數說明:
-    - x — 指定模式，此為必加參數。其他模式尚有<kbd>-c: create</kbd>、<kbd>-r: add/replace</kbd>、<kbd>-t: list</kbd>、<kbd>-u: update</kbd>、<kbd>-x: extract</kbd>
+    - x — 指定模式，此為必加參數。其他模式尚有`-c: create`、`-r: add/replace`、`-t: list`、`-u: update`、`-x: extract`
     - v — verbose. 顯示詳細壓縮/解壓縮過程(如果不加此參數則會在解壓縮完畢後重新看到閃爍游標)
     - z — tells tar to uncompressed the content of a .tar.gz file with gzip.
     - f — instructs tar the name of the file you’re about to extract. 
-    - <kbd>cmd</kbd> 中輸入 <kbd>tar --help</kbd> 看更多
+    - `cmd` 中輸入 `tar --help` 看更多
 4. 解壓縮成功!
 ![](https://i.imgur.com/JAz2pmV.jpg)
 
