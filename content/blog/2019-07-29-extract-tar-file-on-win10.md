@@ -48,3 +48,5 @@ images: []
 - https://support.rstudio.com/hc/en-us/articles/204536588-Downloading-your-application-from-shinyapps-io
 - https://pureinfotech.com/extract-tar-gz-files-windows-10/
 - https://anal02.pixnet.net/blog/post/113556857-tar%E8%A7%A3%E5%A3%93%E7%B8%AE%E6%8C%87%E4%BB%A4
+
+###### tags: `tar` `win10` `linux` `cmd`

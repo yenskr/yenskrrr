@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>
+      
+          split one column to two columns2 - Yenskrrr
+      
+  </title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="map[]" />
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/style.min.a6cab246517742ad1189b209575fc61556550e663cdfe02a0aab0632b39e978b.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  
+  
+  <link rel="stylesheet" href="/css/custom.css">
+  
+
+  <meta property="og:title" content="split one column to two columns2" />
+<meta property="og:description" content="Preface 清理資料的時候，常常會需要用到dplyr套件裡mutate、group_by、summarise等函式（dplyr跟pipeline運算子" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/split-one-column-to-two-columns2/" />
+<meta property="article:published_time" content="2019-07-30T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-07-30T00:00:00&#43;00:00"/>
+
+<meta itemprop="name" content="split one column to two columns2">
+<meta itemprop="description" content="Preface 清理資料的時候，常常會需要用到dplyr套件裡mutate、group_by、summarise等函式（dplyr跟pipeline運算子">
+
+
+<meta itemprop="datePublished" content="2019-07-30T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-07-30T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="757">
+
+
+
+<meta itemprop="keywords" content="R,tidyr,data wrangling," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="split one column to two columns2"/>
+<meta name="twitter:description" content="Preface 清理資料的時候，常常會需要用到dplyr套件裡mutate、group_by、summarise等函式（dplyr跟pipeline運算子"/>
+
+  <!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+  <!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <![endif]-->
+
+  </head>
+
+  <body>
+    
+  <h1>split one column to two columns2</h1>
+  <header>
+  
+  <div class="avatar">
+    <img class="avatarMask" src="//img/avatar.jpg">
+    <a href="/"><img src="//img/avatar-border.svg"></a>
+  </div>
+  
+  <h2><a class="author" href="/">Yenskrrr</a></h2>
+</header>
+
+  
+  
+  <p class="date">July 30, 2019</p>
+  
+  <div id="contentBody">
+    
+
+<h2 id="preface">Preface</h2>
+
+<p>清理資料的時候，常常會需要用到<code>dplyr</code>套件裡<code>mutate</code>、<code>group_by</code>、<code>summarise</code>等函式（<code>dplyr</code>跟pipeline運算子<code>%&gt;%</code>應該是每個初學R做資料分析的人必學的套件吧，<del>沒學過不要說你會R</del>）。</p>
+
+<p>今天除了紀錄一下在解實際問題時個人的思路解法，還會介紹一個<code>tidyr</code>套件的函式，有需要的朋友可以參考看看。</p>
+
+<h2 id="context">Context</h2>
+
+<p>最近收到一份資料，其中有個欄位像這樣:</p>
+
+<pre><code class="language-r">&gt; head(df$GPS)
+[1] &quot;22.627126,120.312473&quot; &quot;22.624569,120.360211&quot;
+[3] &quot;22.611157,120.329407&quot; &quot;22.657952,120.324472&quot;
+</code></pre>
+
+<p>需求很簡單，就是把<code>df</code>的<code>GPS</code>欄位拆開成<code>LNG</code>,<code>LAT</code>兩個欄位。</p>
+
+<h2 id="problem">Problem</h2>
+
+<blockquote>
+<p>把一個 data frame 的欄位切開成兩個欄位</p>
+</blockquote>
+
+<h2 id="solution1-using-base-function">Solution1：using base function</h2>
+
+<p>先記錄一下自己使用基本函式的解法思路</p>
+
+<ol>
+<li><p>使用<code>strsplit</code>把資料分開</p>
+
+<pre><code>&gt; strsplit(dt$發生地點GPS, ',')
+[[1]]
+[1] &quot;22.627126&quot;  &quot;120.312473&quot;
+[[2]]
+[1] &quot;22.624569&quot;  &quot;120.360211&quot;
+[[3]]
+[1] &quot;22.611157&quot;  &quot;120.329407&quot;
+[[4]]
+[1] &quot;22.657952&quot;  &quot;120.324472&quot;
+[[5]]
+[1] &quot;22.639282&quot;  &quot;120.330766&quot;
+[[6]]
+[1] &quot;22.641744&quot;  &quot;120.313873&quot;
+</code></pre></li>
+
+<li><p>可以發現雖然成功切開，不過變成 List of lists 的形式</p></li>
+
+<li><p>這時我們只要善用<code>sapply</code>搭配<code>[</code>就可以取出每個list中的第1個元素</p></li>
+
+<li><p>搭配<code>mutate</code>的效果：</p>
+
+<pre><code>&gt; dt %&gt;% mutate(
+    lat=sapply(strsplit(dt$發生地點GPS,','),&quot;[&quot;,1),
+    lng=sapply(strsplit(dt$發生地點GPS,','),&quot;[&quot;,2)
+  ) %&gt;% select(lat,lng)
+# A tibble: 2,790 x 2
+   lat       lng       
+   &lt;chr&gt;     &lt;chr&gt;     
+ 1 22.627126 120.312473
+ 2 22.624569 120.360211
+ 3 22.611157 120.329407
+ 4 22.657952 120.324472
+ 5 22.639282 120.330766
+ 6 22.641744 120.313873
+ 7 22.644323 120.298523
+ 8 22.647354 120.314703
+ 9 22.633798 120.313527
+10 22.633798 120.313527
+# ... with 2,780 more rows
+</code></pre></li>
+</ol>
+
+<h2 id="solution2-using-tidyr-seperate">Solution2：using <code>tidyr::seperate</code></h2>
+
+<p>後來在找相關資料的時候，找到了<code>tidyr</code>的<code>seperate</code>，直接一行搞定。</p>
+
+<p><code>seperate {tidyr}</code>的<code>help document</code>標題寫得很清楚：</p>
+
+<blockquote>
+<p>Separate a character column into multiple columns using a regular expression separator.</p>
+</blockquote>
+
+<p>實際操作試試看</p>
+
+<pre><code class="language-r">&gt; dt %&gt;% separate(發生地點GPS, c(&quot;lat&quot;, &quot;lng&quot;),sep=',') %&gt;% select(lat,lng)
+# A tibble: 2,790 x 2
+   lat       lng       
+   &lt;chr&gt;     &lt;chr&gt;     
+ 1 22.627126 120.312473
+ 2 22.624569 120.360211
+ 3 22.611157 120.329407
+ 4 22.657952 120.324472
+ 5 22.639282 120.330766
+ 6 22.641744 120.313873
+ 7 22.644323 120.298523
+ 8 22.647354 120.314703
+ 9 22.633798 120.313527
+10 22.633798 120.313527
+# ... with 2,780 more rows
+</code></pre>
+
+<p>還有很多延伸的用法，有機會再來研究。</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://tidyr.tidyverse.org/reference/separate.html">https://tidyr.tidyverse.org/reference/separate.html</a></li>
+<li><a href="https://stackoverflow.com/questions/4350440/split-data-frame-string-column-into-multiple-columns">https://stackoverflow.com/questions/4350440/split-data-frame-string-column-into-multiple-columns</a></li>
+</ul>
+
+<h6 id="tags-r-tidyr-data-wrangling">tags: <code>R</code> <code>tidyr</code> <code>data wrangling</code></h6>
+
+  </div>
+  <footer>
+  <p>
+  &copy; 2019 Yenskrrr.
+  Powered by <a href="https://gohugo.io/">Hugo</a>
+  using the <a href="https://github.com/koirand/pulp/">pulp</a> theme.
+  </p>
+</footer>
+
+
+  </body>
+</html>

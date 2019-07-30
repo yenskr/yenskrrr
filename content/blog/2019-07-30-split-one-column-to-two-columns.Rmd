@@ -61,7 +61,7 @@ head(df$GPS)
 
 > Separate a character column into multiple columns using a regular expression separator
 
-``` {r{}
+``` {r}
 df %>% separate(GPS, c("lat", "lng"),sep=',') %>% select(lat,lng)
 ```
 

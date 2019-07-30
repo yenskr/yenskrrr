@@ -1,3 +1,11 @@
+#contentBody blockquote {
+    padding: 0.5em 1em;
+    font-size: 1.2em;
+    color: #FF5722;
+    background-color: #ff98001f;
+    border-left: .25em solid #FF5722;
+}
+
 #contentBody a {
     color: #337ab7;  
 }

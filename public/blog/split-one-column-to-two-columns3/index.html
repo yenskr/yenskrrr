@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>
+      
+          split one column to two columns3 - Yenskrrr
+      
+  </title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="map[]" />
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/style.min.a6cab246517742ad1189b209575fc61556550e663cdfe02a0aab0632b39e978b.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  
+  
+  <link rel="stylesheet" href="/css/custom.css">
+  
+
+  <meta property="og:title" content="split one column to two columns3" />
+<meta property="og:description" content="Preface 清理資料的時候，常常會需要用到dplyr套件裡mutate、group_by、summarise等函式（dplyr跟pipeline運算子" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/split-one-column-to-two-columns3/" />
+<meta property="article:published_time" content="2019-07-30T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-07-30T00:00:00&#43;00:00"/>
+
+<meta itemprop="name" content="split one column to two columns3">
+<meta itemprop="description" content="Preface 清理資料的時候，常常會需要用到dplyr套件裡mutate、group_by、summarise等函式（dplyr跟pipeline運算子">
+
+
+<meta itemprop="datePublished" content="2019-07-30T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-07-30T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="769">
+
+
+
+<meta itemprop="keywords" content="R,tidyr,data wrangling," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="split one column to two columns3"/>
+<meta name="twitter:description" content="Preface 清理資料的時候，常常會需要用到dplyr套件裡mutate、group_by、summarise等函式（dplyr跟pipeline運算子"/>
+
+  <!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+  <!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <![endif]-->
+
+  </head>
+
+  <body>
+    
+  <h1>split one column to two columns3</h1>
+  <header>
+  
+  <div class="avatar">
+    <img class="avatarMask" src="//img/avatar.jpg">
+    <a href="/"><img src="//img/avatar-border.svg"></a>
+  </div>
+  
+  <h2><a class="author" href="/">Yenskrrr</a></h2>
+</header>
+
+  
+  
+  <p class="date">July 30, 2019</p>
+  
+  <div id="contentBody">
+    
+
+<h2 id="preface">Preface</h2>
+
+<p>清理資料的時候，常常會需要用到<code>dplyr</code>套件裡<code>mutate</code>、<code>group_by</code>、<code>summarise</code>等函式（<code>dplyr</code>跟pipeline運算子<code>%&gt;%</code>應該是每個初學R做資料分析的人必學的套件吧，<del>沒學過不要說你會R</del>）。</p>
+
+<p>今天除了紀錄一下在解實際問題時個人的思路解法，還會介紹一個<code>tidyr</code>套件的函式，有需要的朋友可以參考看看。</p>
+
+<h2 id="context">Context</h2>
+
+<p>最近收到一份資料，其中有個欄位像這樣：
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">head</span>(df<span style="color:#f92672">$</span>GPS)
+[<span style="color:#ae81ff">1</span>] <span style="color:#e6db74">&#34;22.627126,120.312473&#34;</span> <span style="color:#e6db74">&#34;22.624569,120.360211&#34;</span>
+[<span style="color:#ae81ff">3</span>] <span style="color:#e6db74">&#34;22.611157,120.329407&#34;</span> <span style="color:#e6db74">&#34;22.657952,120.324472&#34;</span></code></pre></div></p>
+
+<p>需求很簡單，就是把<code>df</code>的<code>GPS</code>欄位拆開成<code>LNG</code>,<code>LAT</code>兩個欄位。</p>
+
+<h2 id="problem">Problem</h2>
+
+<blockquote>
+<p>把一個 data frame 的欄位切開成兩個欄位</p>
+</blockquote>
+
+<h2 id="solution1-using-base-function">Solution1：using base function</h2>
+
+<p>先記錄一下自己使用基本函式的解法思路</p>
+
+<ol>
+<li>使用<code>strsplit</code>把資料分開
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">strsplit</span>(dt<span style="color:#f92672">$</span>發生地點GPS, <span style="color:#e6db74">&#39;,&#39;</span>)
+    [[<span style="color:#ae81ff">1</span>]]
+    [<span style="color:#ae81ff">1</span>] <span style="color:#e6db74">&#34;22.627126&#34;</span>  <span style="color:#e6db74">&#34;120.312473&#34;</span>
+    [[<span style="color:#ae81ff">2</span>]]
+    [<span style="color:#ae81ff">1</span>] <span style="color:#e6db74">&#34;22.624569&#34;</span>  <span style="color:#e6db74">&#34;120.360211&#34;</span>
+    [[<span style="color:#ae81ff">3</span>]]
+    [<span style="color:#ae81ff">1</span>] <span style="color:#e6db74">&#34;22.611157&#34;</span>  <span style="color:#e6db74">&#34;120.329407&#34;</span>
+    [[<span style="color:#ae81ff">4</span>]]
+    [<span style="color:#ae81ff">1</span>] <span style="color:#e6db74">&#34;22.657952&#34;</span>  <span style="color:#e6db74">&#34;120.324472&#34;</span>
+    [[<span style="color:#ae81ff">5</span>]]
+    [<span style="color:#ae81ff">1</span>] <span style="color:#e6db74">&#34;22.639282&#34;</span>  <span style="color:#e6db74">&#34;120.330766&#34;</span>
+    [[<span style="color:#ae81ff">6</span>]]
+    [<span style="color:#ae81ff">1</span>] <span style="color:#e6db74">&#34;22.641744&#34;</span>  <span style="color:#e6db74">&#34;120.313873&#34;</span>
+    </code></pre></div></li>
+<li>可以發現雖然成功切開，不過變成 List of lists 的形式</li>
+<li>這時我們只要善用<code>sapply</code>搭配<code>[</code>就可以取出每個list中的第1個元素</li>
+<li>搭配<code>mutate</code>的效果：
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#f92672">&gt;</span> dt <span style="color:#f92672">%&gt;%</span> mutate(
+        lat<span style="color:#f92672">=</span><span style="color:#66d9ef">sapply</span>(<span style="color:#66d9ef">strsplit</span>(dt<span style="color:#f92672">$</span>發生地點GPS,<span style="color:#e6db74">&#39;,&#39;</span>),<span style="color:#e6db74">&#34;[&#34;</span>,<span style="color:#ae81ff">1</span>),
+        lng<span style="color:#f92672">=</span><span style="color:#66d9ef">sapply</span>(<span style="color:#66d9ef">strsplit</span>(dt<span style="color:#f92672">$</span>發生地點GPS,<span style="color:#e6db74">&#39;,&#39;</span>),<span style="color:#e6db74">&#34;[&#34;</span>,<span style="color:#ae81ff">2</span>)
+      ) <span style="color:#f92672">%&gt;%</span> select(lat,lng)
+    <span style="color:#75715e"># A tibble: 2,790 x 2</span>
+       lat       lng       
+       <span style="color:#f92672">&lt;</span>chr<span style="color:#f92672">&gt;</span>     <span style="color:#f92672">&lt;</span>chr<span style="color:#f92672">&gt;</span>     
+     <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">22.627126</span> <span style="color:#ae81ff">120.312473</span>
+     <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">22.624569</span> <span style="color:#ae81ff">120.360211</span>
+     <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">22.611157</span> <span style="color:#ae81ff">120.329407</span>
+     <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">22.657952</span> <span style="color:#ae81ff">120.324472</span>
+     <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">22.639282</span> <span style="color:#ae81ff">120.330766</span>
+     <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">22.641744</span> <span style="color:#ae81ff">120.313873</span>
+     <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">22.644323</span> <span style="color:#ae81ff">120.298523</span>
+     <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">22.647354</span> <span style="color:#ae81ff">120.314703</span>
+     <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">22.633798</span> <span style="color:#ae81ff">120.313527</span>
+    <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">22.633798</span> <span style="color:#ae81ff">120.313527</span>
+    <span style="color:#75715e"># ... with 2,780 more rows</span>
+    </code></pre></div></li>
+</ol>
+
+<h2 id="solution2-using-tidyr-seperate">Solution2：using <code>tidyr::seperate</code></h2>
+
+<p>後來在找相關資料的時候，找到了<code>tidyr</code>的<code>seperate</code>，直接一行搞定。</p>
+
+<p><code>seperate {tidyr}</code>的<code>help document</code>標題寫得很清楚：</p>
+
+<blockquote>
+<p>Separate a character column into multiple columns using a regular expression separator.</p>
+</blockquote>
+
+<p>實際操作試試看
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#f92672">&gt;</span> dt <span style="color:#f92672">%&gt;%</span> separate(發生地點GPS, <span style="color:#66d9ef">c</span>(<span style="color:#e6db74">&#34;lat&#34;</span>, <span style="color:#e6db74">&#34;lng&#34;</span>),sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;,&#39;</span>) <span style="color:#f92672">%&gt;%</span> select(lat,lng)
+<span style="color:#75715e"># A tibble: 2,790 x 2</span>
+   lat       lng       
+   <span style="color:#f92672">&lt;</span>chr<span style="color:#f92672">&gt;</span>     <span style="color:#f92672">&lt;</span>chr<span style="color:#f92672">&gt;</span>     
+ <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">22.627126</span> <span style="color:#ae81ff">120.312473</span>
+ <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">22.624569</span> <span style="color:#ae81ff">120.360211</span>
+ <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">22.611157</span> <span style="color:#ae81ff">120.329407</span>
+ <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">22.657952</span> <span style="color:#ae81ff">120.324472</span>
+ <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">22.639282</span> <span style="color:#ae81ff">120.330766</span>
+ <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">22.641744</span> <span style="color:#ae81ff">120.313873</span>
+ <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">22.644323</span> <span style="color:#ae81ff">120.298523</span>
+ <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">22.647354</span> <span style="color:#ae81ff">120.314703</span>
+ <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">22.633798</span> <span style="color:#ae81ff">120.313527</span>
+<span style="color:#ae81ff">10</span> <span style="color:#ae81ff">22.633798</span> <span style="color:#ae81ff">120.313527</span>
+<span style="color:#75715e"># ... with 2,780 more rows</span></code></pre></div></p>
+
+<p>還有很多延伸的用法，有機會再來研究。</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://tidyr.tidyverse.org/reference/separate.html">https://tidyr.tidyverse.org/reference/separate.html</a></li>
+<li><a href="https://stackoverflow.com/questions/4350440/split-data-frame-string-column-into-multiple-columns">https://stackoverflow.com/questions/4350440/split-data-frame-string-column-into-multiple-columns</a></li>
+</ul>
+
+<h6 id="tags-r-tidyr-data-wrangling">tags: <code>R</code> <code>tidyr</code> <code>data wrangling</code></h6>
+
+  </div>
+  <footer>
+  <p>
+  &copy; 2019 Yenskrrr.
+  Powered by <a href="https://gohugo.io/">Hugo</a>
+  using the <a href="https://github.com/koirand/pulp/">pulp</a> theme.
+  </p>
+</footer>
+
+
+  </body>
+</html>
