@@ -3,6 +3,7 @@ title = "Yenskrrr"
 theme = "pulp"
 canonifyurls = true
 hasCJKLanguage = true
+enableEmoji = true
 # pygmentsCodefences = true
 # disqusShortname = "yenskr"
 # pygmentsStyle = "Zenburn"

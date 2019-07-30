@@ -1,3 +1,7 @@
+.emoji {
+    font-family: Apple Color Emoji,Segoe UI Emoji,NotoColorEmoji,Segoe UI Symbol,Android Emoji,EmojiSymbols;
+}
+
 #contentBody blockquote {
     padding: 0.5em 1em;
     font-size: 1.2em;
