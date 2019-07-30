@@ -12,6 +12,7 @@ images: []
 ---
 
 ## Preface
+
 清理資料的時候，常常會需要用到`dplyr`套件裡`mutate`、`group_by`、`summarise`等函式（`dplyr`跟pipeline運算子`%>%`應該是每個初學R做資料分析的人必學的套件吧，~~沒學過不要說你會R~~）。
 
 今天除了紀錄一下在解實際問題時個人的思路解法，還會介紹一個`tidyr`套件的函式，有需要的朋友可以參考看看。
@@ -25,7 +26,8 @@ df <- df %>% rename( GPS = '發生地點GPS')
 ```
 
 ## Context
-最近收到一份資料，其中有個欄位像這樣:
+
+最近收到一份資料，其中有個欄位像這樣：
 ``` {r}
 head(df$GPS)
 ```
@@ -35,18 +37,19 @@ head(df$GPS)
 > 把一個 data frame 的欄位切開成兩個欄位
 
 ## Solution1：using base function
+
 先記錄一下自己使用基本函式的解法思路
 
 1. 使用`strsplit`把資料分開
     ``` {r}
     strsplit(df$GPS, ',') %>% head
     ```
-2. 可以發現雖然成功切開，不過變成List of list的形式
-3. 這時我們只要善用`sapply`搭配`[`就可以取出每個list中的第一個元素
+2. 可以發現雖然成功切開，不過變成 List of lists 的形式
+3. 這時我們只要善用`sapply`搭配`[`就可以取出每個list中的第1個元素
     ``` {r}
     sapply(strsplit(df$GPS, ',') , "[", 1) %>% head
     ```
-4. 搭配`mutate`:
+4. 搭配`mutate`的效果：
     ``` {r}
     df %>% mutate(
         lat=sapply(strsplit(df$GPS,','),"[",1),
@@ -55,12 +58,14 @@ head(df$GPS)
     ```
 
 ## Solution2：using `tidyr::seperate`
+
 後來在找相關資料的時候，找到了`tidyr`的`seperate`，直接一行搞定。
 
-`help document`標題就寫得很清楚：
+`seperate {tidyr}`的`help document`標題寫得很清楚：
+> seperate {tidyr}:
+> Separate a character column into multiple columns using a regular expression separator.
 
-> Separate a character column into multiple columns using a regular expression separator
-
+實際操作試試看
 ``` {r}
 df %>% separate(GPS, c("lat", "lng"),sep=',') %>% select(lat,lng)
 ```
