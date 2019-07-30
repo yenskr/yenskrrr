@@ -38,7 +38,7 @@
 
 <meta itemprop="datePublished" content="2019-07-30T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-07-30T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="666">
+<meta itemprop="wordCount" content="685">
 
 
 
@@ -86,7 +86,7 @@
 </div>
 <div id="context" class="section level2">
 <h2>Context</h2>
-<p>最近收到一份資料，其中有個欄位像這樣:</p>
+<p>最近收到一份資料，其中有個欄位像這樣：</p>
 <pre class="r"><code>head(df$GPS)</code></pre>
 <pre><code>## [1] &quot;22.627126,120.312473&quot; &quot;22.624569,120.360211&quot; &quot;22.611157,120.329407&quot;
 ## [4] &quot;22.657952,120.324472&quot; &quot;22.639282,120.330766&quot; &quot;22.641744,120.313873&quot;</code></pre>
@@ -121,11 +121,11 @@
 ## 
 ## [[6]]
 ## [1] &quot;22.641744&quot;  &quot;120.313873&quot;</code></pre></li>
-<li>可以發現雖然成功切開，不過變成List of list的形式</li>
-<li><p>這時我們只要善用<code>sapply</code>搭配<code>[</code>就可以取出每個list中的第一個元素</p>
+<li>可以發現雖然成功切開，不過變成 List of lists 的形式</li>
+<li><p>這時我們只要善用<code>sapply</code>搭配<code>[</code>就可以取出每個list中的第1個元素</p>
 <pre class="r"><code>sapply(strsplit(df$GPS, &#39;,&#39;) , &quot;[&quot;, 1) %&gt;% head</code></pre>
 <pre><code>## [1] &quot;22.627126&quot; &quot;22.624569&quot; &quot;22.611157&quot; &quot;22.657952&quot; &quot;22.639282&quot; &quot;22.641744&quot;</code></pre></li>
-<li><p>搭配<code>mutate</code>:</p>
+<li><p>搭配<code>mutate</code>的效果：</p>
 <pre class="r"><code>df %&gt;% mutate(
     lat=sapply(strsplit(df$GPS,&#39;,&#39;),&quot;[&quot;,1),
     lng=sapply(strsplit(df$GPS,&#39;,&#39;),&quot;[&quot;,2)
@@ -149,10 +149,10 @@
 <div id="solution2using-tidyrseperate" class="section level2">
 <h2>Solution2：using <code>tidyr::seperate</code></h2>
 <p>後來在找相關資料的時候，找到了<code>tidyr</code>的<code>seperate</code>，直接一行搞定。</p>
-<p><code>help document</code>標題就寫得很清楚：</p>
-<blockquote>
-<p>Separate a character column into multiple columns using a regular expression separator</p>
-</blockquote>
+<p><code>seperate {tidyr}</code>的<code>help document</code>標題寫得很清楚：
+&gt; seperate {tidyr}:
+&gt; Separate a character column into multiple columns using a regular expression separator.</p>
+<p>實際操作試試看</p>
 <pre class="r"><code>df %&gt;% separate(GPS, c(&quot;lat&quot;, &quot;lng&quot;),sep=&#39;,&#39;) %&gt;% select(lat,lng)</code></pre>
 <pre><code>## # A tibble: 2,790 x 2
 ##    lat       lng       
