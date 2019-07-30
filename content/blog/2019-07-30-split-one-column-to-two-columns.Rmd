@@ -59,13 +59,12 @@ head(df$GPS)
 
 ## Solution2：using `tidyr::seperate`
 
-後來在找相關資料的時候，找到了`tidyr`的`seperate`，直接一行搞定。
+後來在找相關資料的時候，找到了`tidyr`的`seperate`，直接一行搞定。  
+help document 把這個函數的作用寫得非常清楚：
 
-`seperate {tidyr}`的`help document`標題寫得很清楚：
-> seperate {tidyr}:
 > Separate a character column into multiple columns using a regular expression separator.
 
-實際操作試試看
+實際操作試試看吧!
 ``` {r}
 df %>% separate(GPS, c("lat", "lng"),sep=',') %>% select(lat,lng)
 ```

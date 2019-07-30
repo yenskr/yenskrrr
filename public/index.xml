@@ -11,24 +11,6 @@
     
     
     <item>
-      <title>split one column to two columns2</title>
-      <link>/blog/split-one-column-to-two-columns2/</link>
-      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/split-one-column-to-two-columns2/</guid>
-      <description>Preface 清理資料的時候，常常會需要用到dplyr套件裡mutate、group_by、summarise等函式（dplyr跟pipeline運算子</description>
-    </item>
-    
-    <item>
-      <title>split one column to two columns3</title>
-      <link>/blog/split-one-column-to-two-columns3/</link>
-      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/split-one-column-to-two-columns3/</guid>
-      <description>Preface 清理資料的時候，常常會需要用到dplyr套件裡mutate、group_by、summarise等函式（dplyr跟pipeline運算子</description>
-    </item>
-    
-    <item>
       <title>把欄位切開另存成兩個欄位</title>
       <link>/blog/split-one-column-to-two-columns/</link>
       <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>

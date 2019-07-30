@@ -82,11 +82,12 @@ images: []
 </div>
 <div id="solution2using-tidyrseperate" class="section level2">
 <h2>Solution2：using <code>tidyr::seperate</code></h2>
-<p>後來在找相關資料的時候，找到了<code>tidyr</code>的<code>seperate</code>，直接一行搞定。</p>
-<p><code>seperate {tidyr}</code>的<code>help document</code>標題寫得很清楚：
-&gt; seperate {tidyr}:
-&gt; Separate a character column into multiple columns using a regular expression separator.</p>
-<p>實際操作試試看</p>
+<p>後來在找相關資料的時候，找到了<code>tidyr</code>的<code>seperate</code>，直接一行搞定。<br />
+help document 把這個函數的作用寫得非常清楚：</p>
+<blockquote>
+<p>Separate a character column into multiple columns using a regular expression separator.</p>
+</blockquote>
+<p>實際操作試試看吧!</p>
 <pre class="r"><code>df %&gt;% separate(GPS, c(&quot;lat&quot;, &quot;lng&quot;),sep=&#39;,&#39;) %&gt;% select(lat,lng)</code></pre>
 <pre><code>## # A tibble: 2,790 x 2
 ##    lat       lng       
